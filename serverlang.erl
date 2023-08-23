@@ -29,15 +29,14 @@ accept_loop(ListenSocket) ->
     {ok, Socket} = gen_tcp:accept(ListenSocket),
     spawn(fun() -> handle_request(Socket, "") end),
     accept_loop(ListenSocket).
-	
+
 %% "GIT BASH" =>  rm -r -f  serverlang.beam	 "WINDOWS" del /f /a  serverlang.beam
 %% erlc serverlang.erl
-	
-		
+
+
 %% erl -sname serverlang -detached -run serverlang start      -- serverlang:start().
 
 %% erl -sname serverlang -detached -run serverlang stop
-%% erl -sname serverlang -eval 'serverlang:stop().' 
+%% erl -sname serverlang -eval 'serverlang:stop().'
 
 
- 

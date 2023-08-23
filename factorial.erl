@@ -20,3 +20,4 @@ fac(0) -> 1;
 fac(N) -> N * fac(N-1).
 
 %% escript factorial.erl 5
+%% erl -noshell -sname factorial -run factorial main 5 -s init stop
