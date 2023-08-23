@@ -10,14 +10,14 @@ main([String]) ->
     catch
         _:_ -> usage()
     end;
-    main(_) -> usage()
+    main(_) -> usage(),
+  Cars = [{"Toyota", "Camry", 2023}, {"Honda", "Civic", 2022}, {"Ford", "Mustang", 2023},{"Toyota","Camry",2023},{"Honda","Civic",2022},{"Ford","Mustang",2023}]
 .
 
 
 start() ->
-    io:format("Car Registry~n"),
-    loop([]),
-    CarList = [{"Toyota", "Camry", 2023}, {"Honda", "Civic", 2022}, {"Ford", "Mustang", 2023}],[{"Toyota","Camry",2023},{"Honda","Civic",2022},{"Ford","Mustang",2023}]
+  io:format("Car Registry~n"),
+  loop([])
 .
 add_car(Name, Model, Year) ->
   Car = {Name, Model, Year},
@@ -53,10 +53,11 @@ print_cars(Rest).
 
 
 
-%% CarList = [{"Toyota", "Camry", 2023}, {"Honda", "Civic", 2022}, {"Ford", "Mustang", 2023}].[{"Toyota","Camry",2023},{"Honda","Civic",2022},{"Ford","Mustang",2023}]
+%% Cars = [{"Toyota", "Camry", 2023}, {"Honda", "Civic", 2022}, {"Ford", "Mustang", 2023}],[{"Toyota","Camry",2023},{"Honda","Civic",2022},{"Ford","Mustang",2023}].
 
 %% Execucao utilizando a funcao main
 %% escript carros.erl "World"
 
 %% Execucao utilizando a funcao diretamente
 %% erl -noshell -s carros start "World" -s init stop
+ 
