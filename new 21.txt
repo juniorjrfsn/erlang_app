@@ -1,0 +1,58 @@
+-module(serverlang).
+-export([start/0, stop/0]).
+
+start() ->
+    {ok, Listen} = gen_tcp:listen(8080, [binary, {active, false}, {reuseaddr, true}]),
+    spawn(fun() -> accept(Listen) end).
+
+accept(Listen) ->
+    {ok, Socket} = gen_tcp:accept(Listen),
+    spawn(fun() -> handle(Socket) end),
+    accept(Listen).
+
+handle(Socket) ->
+    {ok, Request} = gen_tcp:recv(Socket, 0),
+    Method = get_method(Request),
+    Path = get_path(Request),
+    handle_request(Socket, Method, Path).
+
+get_method(Request) ->
+    [Method, Path, _] = string:tokens(Request, " "),
+	io:format("Server started at http://localhost:8080~n Pid~s~n", [Path]),
+    Method.
+
+get_path(Request) ->
+    [_, Path, _] = string:tokens(Request, " "),
+    Path.
+
+handle_request(Socket, "GET", "/") ->
+    gen_tcp:send(Socket, "HTTP/1.1 200 OK\r\nContent-Type: text/html\r\n\r\n<html><body><h1>Bem-vindo ao servidor web em Erlang!</h1></body></html>"),
+    open_browser("http://localhost:8080/"),
+    gen_tcp:close(Socket);
+handle_request(Socket, _, _) ->
+    gen_tcp:send(Socket, "HTTP/1.1 404 Not Found\r\nContent-Type: text/html\r\n\r\n<html><body><h1>404 Página não encontrada</h1></body></html>"),
+    gen_tcp:close(Socket).
+
+open_browser(URL) ->
+    case os:type() of
+        {win32, _} ->
+            os:cmd("start " ++ URL);
+        {unix, _} ->
+            os:cmd("xdg-open " ++ URL)
+    end.
+
+stop() ->
+    case whereis(serverlang_sup) of
+        undefined ->
+            ok;
+        Pid ->
+            Pid ! stop,
+            receive
+                stopped -> ok
+            end
+    end.
+	
+%% erl -sname serverlang -detached -run serverlang start       -- serverlang:start().
+
+%% erl -sname serverlang -detached -run serverlang stop
+%% erl -sname serverlang -eval 'serverlang:stop().' 

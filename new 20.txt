@@ -1,0 +1,50 @@
+-module(serverlang).
+-export([start/0,stop/1]).
+
+start() ->
+    {ok, ListenSocket} = gen_tcp:listen(8080, [{active, false}, {reuseaddr, true}]),
+    loop(ListenSocket),
+    io:format("Server started on port 8080~n").
+
+stop() ->
+   %% Tenta obter o PID do servidor
+  
+
+    %% Inicializa o servidor na porta 8080
+    %% Código para inicialização do servidor aqui
+	ok1 = gen_tcp:close(ListenSocket),
+    ok2 = io:format("Servidor finalizado na porta 8080.~n"), 
+    %% Retorna um PID do servidor para uso posterior
+    register(serverlang, self()).
+	
+loop(ListenSocket) ->
+    {ok, Socket} = gen_tcp:accept(ListenSocket),
+    spawn(fun() -> handle(Socket) end),
+    loop(ListenSocket).
+
+handle(Socket) ->
+    Request = read_request(Socket),
+    Response = handle_request(Request),
+    gen_tcp:send(Socket, Response),
+    gen_tcp:close(Socket).
+
+read_request(Socket) ->
+    {ok, Request} = gen_tcp:recv(Socket, 0),
+    Request.
+
+handle_request(_Request) ->
+    "HTTP/1.0 200 OK\r\nContent-Type: text/html\r\n\r\n<html><body><h1>Welcome to my Erlang web server ahue!</h1></body></html>\r\n".
+
+%% erlc serverlang.erl
+%% erl -noshell -s serverlang start 
+%% erl -noshell -s serverlang start -s init stop
+%% erl -noshell -s serverlang start -s init 
+%% inicia o servidor   	erl -sname serverlang -detached -pa path/to/your/beam/files -run serverlang start
+%% inicia o servidor   	erl -sname serverlang -detached  -run serverlang start
+%% fecha o servidor 	erl -sname serverlang -eval "serverlang:stop()."
+%% fecha o servidor 	erl -detached -sname serverlang -s server stop
+%% http://localhost:8080
+
+%% serverlang:start(). serverlang:stop(ListenSocket).
+%% serverlang:stop(ListenSocket).
+ 

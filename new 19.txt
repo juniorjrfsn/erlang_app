@@ -1,0 +1,6 @@
+faça um código de serviço web escrito em erlang, quando for executado mostrar na linha de comando a URL do serviço e mostre uma mensagem de boas vindas mostrando o PID incializado no HTML, 
+este serviço deverá ser iniciado incluindo os comando  erl -sname serverdois -noshell -detached -run serverdois start 
+na porta 8082 
+e finalizando incluindo os comandos erl -sname serverdois -noshell -detached -run serverdois stop 
+o nome do module será "serverdois"  e o nome do arquivo serverdois.erl 
+utilizando gen_tcp, Socket,   gen_server,  controlador de PID do serviço 

@@ -1,0 +1,26 @@
+-module(serverlang).
+-export([start/0, stop/0]).
+
+start() ->
+    {ok, ListenSocket} = gen_tcp:listen(8080, [binary, {packet, 0}, {reuseaddr, true}]),
+    spawn(fun() -> accept_loop(ListenSocket) end).
+
+stop() ->
+    case whereis(serverlang) of
+        undefined -> ok;
+        Pid -> exit(Pid, shutdown)
+    end.
+
+accept_loop(ListenSocket) ->
+    case gen_tcp:accept(ListenSocket) of
+        {ok, Socket} ->
+            spawn(fun() -> handle_request(Socket) end),
+            accept_loop(ListenSocket);
+        {error, closed} -> ok;
+        {error, Reason} -> io:format("Error accepting connection: ~p~n", [Reason])
+    end.
+
+handle_request(Socket) ->
+    gen_tcp:send(Socket, "HTTP/1.1 200 OK\r\nContent-Type: text/html\r\n\r\n"),
+    gen_tcp:send(Socket, "<html><body><h1>Bem-vindo ao servidor Erlang nozes!</h1></body></html>\r\n"),
+    gen_tcp:close(Socket).

@@ -1,0 +1,26 @@
+-module(serverlang).
+-export([start/0, stop/1, handle_request/1]).
+
+-define(PORT, 8080).
+
+start() ->
+    {ok, ListenSocket} = gen_tcp:listen(?PORT, [{active, false}, {reuseaddr, true}]),
+    spawn(fun() -> accept_loop(ListenSocket) end),
+	io:format("Server started at http://localhost:8080~n ListenSocket: ~s~n", [ListenSocket]),
+    {ok, "Server started."}.
+
+accept_loop(ListenSocket) ->
+    {ok, Socket} = gen_tcp:accept(ListenSocket),
+    spawn(fun() -> handle_request(Socket) end),
+    accept_loop(ListenSocket).
+
+handle_request(Socket) ->
+    {ok, Request} = gen_tcp:recv(Socket, 0),
+	io:format("Request: ~s~n", [Request]),
+    Response =  "HTTP/1.1 200 OK\r\nContent-Type: text/html\r\n\r\n<html><body><h1>Welcome to Erlang Web Server</h1><p>PID:  </p></body></html>" ,
+    gen_tcp:send(Socket, Response),
+    gen_tcp:close(Socket).
+
+stop(Pid) ->
+    exit(Pid, normal),
+    {ok, "Server stopped."}.

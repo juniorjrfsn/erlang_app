@@ -1,0 +1,81 @@
+-module(serverdois).
+-export([start/0, stop/0,  handle_send_timeout/0]).
+
+% Inicia o servidor web
+start() -> 
+	{ok, Listen} = gen_tcp:listen(8081, [binary, {packet, 0}, {reuseaddr, true}]),
+	Pid = spawn(fun() -> wait_for_connection(Listen) end),
+	io:format("Serviço iniciado em http://localhost:8081~n PID: ~w~n", [Pid]) 
+.
+
+% Aguarda a conexão do cliente
+wait_for_connection(Listen) ->
+    %% {ok, Socket} = gen_tcp:accept(Listen),
+	case gen_tcp:accept(Listen) of
+        {ok,Socket} ->
+			{ok, Bin} = do_recv(Socket, []), 
+			io:format("Bin: ~w~n", [Bin]), 
+			spawn(fun() -> handle_request(Socket,"") end),
+			wait_for_connection(Listen) ;
+        Other ->
+            io:format("accept returned ~w - goodbye!~n",[Other]),
+            ok
+    end.
+
+% Manipula a requisição HTTP 
+do_recv(Sock, Bs) ->
+    case gen_tcp:recv(Sock, 0) of
+        {ok, B} ->
+            do_recv(Sock, [Bs, B]);
+        {error, closed} ->
+            {ok, list_to_binary(Bs)}
+    end.
+
+loop(Socket) ->
+    receive
+        {Client, send_data, Binary} ->
+            case gen_tcp:send(Socket,[Binary]) of
+                {error, timeout} ->
+                    io:format("Send timeout, closing!~n",
+                              []),
+                    handle_send_timeout(), % Not implemented here
+                    Client ! {self(),{error_sending, timeout}},
+                    %% Usually, it's a good idea to give up in case of a 
+                    %% send timeout, as you never know how much actually 
+                    %% reached the server, maybe only a packet header?!
+                    gen_tcp:close(Socket);
+                {error, OtherSendError} ->
+                    io:format("Some other error on socket (~p), closing",
+                              [OtherSendError]),
+                    Client ! {self(),{error_sending, OtherSendError}},
+                    gen_tcp:close(Socket);
+                ok ->
+                    Client ! {self(), data_sent},
+                    loop(Socket)
+            end
+    end.
+	
+	
+handle_request(Socket, _Data) -> 
+
+	%%  {ok, Request} = gen_tcp:recv(Socket, 0),
+ 
+    Response = "HTTP/1.1 200 OK\r\nContent-Type: text/html\r\n\r\n<html><body><h1>Welcome to the serverlang!</h1><p>PID: " ++ erlang:pid_to_list(self()) ++ "</p></body></html>",
+    gen_tcp:send(Socket, Response),
+    gen_tcp:close(Socket).
+
+
+% Finaliza o servidor web
+stop() ->
+    ok.
+
+ 
+
+%% "GIT BASH" =>  rm -r -f  serverdois.beam	 "WINDOWS" del /f /a  serverdois.beam
+%% erlc serverdois.erl
+	
+		
+%% erl -sname serverdois -detached -run serverdois start      -- serverdois:start().
+
+%% erl -sname serverdois -detached -run serverdois stop
+%% erl -sname serverdois -eval 'serverdois:stop().'

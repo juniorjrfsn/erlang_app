@@ -1,0 +1,31 @@
+-module(serverlang).
+-export([start/0,stop/0]).
+
+start() ->
+  application:start(inets),
+    {ok, _} = inets:start(httpd, [{port, 8080}], [{dispatch, [{"/", handle_request}]}]),
+    io:format("Servidor iniciado na porta 8080~n").
+
+stop() ->
+    inets:stop(httpd),
+    io:format("Servidor finalizado~n").
+ 
+	
+handle_request(_Request) ->
+    {ok, Headers, "<html><body><h1>Bem-vindo ao servidor Erlang!</h1></body></html>"}.
+
+%% erlc serverlang.erl
+%% erl -noshell -s serverlang start 
+%% erl -noshell -s serverlang start -s init stop
+%% erl -noshell -s serverlang start -s init 
+%% inicia o servidor   	erl -sname serverlang -detached -pa path/to/your/beam/files -run serverlang start
+%% inicia o servidor   	erl -sname serverlang -detached  -run serverlang start
+%% fecha o servidor 	erl -sname serverlang -eval "serverlang:stop()."
+%% fecha o servidor 	erl -detached -sname serverlang -s server stop
+%% http://localhost:8080
+
+%% serverlang:start(). serverlang:stop(ListenSocket).
+%% erl -sname serverlang -detached -run serverlang start
+%% erl -sname serverlang -detached -run serverlang stop
+%% serverlang:stop(ListenSocket).
+ 

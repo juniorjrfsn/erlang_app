@@ -1,0 +1,10 @@
+faça um código de serviço web escrito em erlang, quando for executado mostrar na linha de comando a 
+URL do serviço e mostre uma mensagem de boas vindas mostrando o PID incializado no HTML, 
+este serviço deverá ser iniciado incluindo os comando   servidor start 
+na porta 8082 
+e finalizando incluindo os comandos  servidor stop 
+o nome do module será "servidor"  e o nome do arquivo servidor.erl 
+utilizando gen_tcp, Socket controlador de PID do serviço 
+
+quando eu inciar o servidor poderei fechar a linha de comando e o servidor deverá continuar funcionando
+e se eu quiser fechar o servidor basta eu abrir a linha o prompt de comando finalizar com um stop e outros parametros o servidor
