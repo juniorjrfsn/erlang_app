@@ -9,12 +9,10 @@ main([String]) ->
     catch
         _:_ -> usage()
     end;
-main(_) ->
-    usage().
+    main(_) -> usage()
+.
 
-    usage() ->
-        io:format("usage: factorial integer\n"),
-        halt(1).
+usage() -> io:format("usage: factorial integer\n"), halt(1).
 
 
 %% Execucao utilizando a funcao main
