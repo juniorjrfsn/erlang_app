@@ -9,6 +9,7 @@ Create aplicação
 
 ``````
 $ rebar3 new app sistema
+$ rebar3 new release sistema
 ``````
 
 ``````
