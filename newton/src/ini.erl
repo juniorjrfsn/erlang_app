@@ -23,7 +23,7 @@ usage() ->
 % cd newton
 
 % erlc -pa * calc/forca.erl
-
+% erlc  ini.erl calc/forca.erl -- windows
 
 %% executar -> ini:main(["100.0", "9.81"]).
 %% escript ini.erl 100.0 9.8
