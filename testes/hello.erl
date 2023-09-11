@@ -20,10 +20,11 @@ usage() -> io:format("usage: factorial integer\n"), halt(1).
 %% Execucao utilizando a funcao diretamente
 %% erl -noshell -s hello alooo "World" -s init stop
 
-% erl
-%
+% $ erl
+%Erlang/OTP 27 [DEVELOPMENT] [erts-14.0.2] [source-6ba086ecb1] [64-bit] [smp:6:6] [ds:6:6:10] [async-threads:1] [jit:ns]
+%Eshell V14.0.2 (press Ctrl+G to abort, type help(). for help)
 % 1> c(hello).
 % {ok,hello}
-% 2> hello:world().
-% Hello, world
+% 2> hello:alooo(["junior como vai !?"]).
+% Hello, junior como vai !?!
 % ok
