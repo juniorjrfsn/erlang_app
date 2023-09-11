@@ -1,6 +1,6 @@
 -module(ini).
 -export([main/1, usage/0]).
- 
+
 main([Mas,Ace]) ->
     try
         M = list_to_float(Mas),
@@ -16,14 +16,16 @@ main(_) ->
 
 usage() ->
     io:format("usage: factorial integer\n"),
-    halt(1).
+    halt(1)
+.
 
 
-% cd newton 
+% cd newton
 
 % erlc -pa * calc/forca.erl
- 
 
-%% executar -> ini:main(["100.0", "9.81"]). 
+
+%% executar -> ini:main(["100.0", "9.81"]).
 %% escript ini.erl 100.0 9.8
 %% erl -noshell -sname ini -run ini main 100.0 9.81  -s init stop
+%% erl -noshell -sname ini -run ini main "100.0" "9.81"  -s init stop
