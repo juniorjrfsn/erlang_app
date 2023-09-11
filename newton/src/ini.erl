@@ -26,6 +26,6 @@ usage() ->
 % erlc  ini.erl calc/forca.erl -- windows
 
 %% executar -> ini:main(["100.0", "9.81"]).
-%% escript ini.erl 100.0 9.8
+%% escript ini.erl 100.0 9.81
 %% erl -noshell -sname ini -run ini main 100.0 9.81  -s init stop
 %% erl -noshell -sname ini -run ini main "100.0" "9.81"  -s init stop
