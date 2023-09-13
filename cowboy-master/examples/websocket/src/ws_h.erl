@@ -9,7 +9,7 @@ init(Req, Opts) ->
 	{cowboy_websocket, Req, Opts}.
 
 websocket_init(State) ->
-	erlang:start_timer(1000, self(), <<"Hello!">>),
+	erlang:start_timer(1000, self(), <<"Hello f!">>),
 	{[], State}.
 
 websocket_handle({text, Msg}, State) ->
