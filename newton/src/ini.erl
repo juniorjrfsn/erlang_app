@@ -5,7 +5,7 @@ main([Mas,Ace]) ->
     try
         M = list_to_float(Mas),
         A = list_to_float(Ace),
-        N = forca:forcaN(M,A),
+        N = fisica:forcaN(M,A),
         io:format("A força resultante é: ~p newtons ~n ", [N])
     catch
         _:_ ->
@@ -22,8 +22,8 @@ usage() ->
 
 % cd newton
 
-% erlc -pa * calc/forca.erl
-% erlc  ini.erl calc/forca.erl -- windows
+% erlc -pa * calc/fisica.erl
+% erlc  ini.erl calc/fisica.erl -- windows
 
 %% executar -> ini:main(["100.0", "9.81"]).
 %% escript ini.erl 100.0 9.81
