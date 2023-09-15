@@ -1,7 +1,5 @@
-% calc
 -module(fisica).
-% -compile(export_all).
--export([forcaN/2,constanteG/0, forcaG/3,forcaGdaTerraEdaLua/0,pesoN/2]).
+-export([forcaN/2,constanteG/0, forcaG/3,forcaGdaTerraEdaLua/0,pesoN/2, energiaCinetica/2]).
 
 forcaN(Massa,Aceleracao)-> (Massa*Aceleracao).
 
@@ -29,12 +27,12 @@ forcaGdaTerraEdaLua() ->
 .
 
 pesoN(Massa, Espace  ) ->
-    Newton = case Espace of
-        "Sol"   -> (Massa * 274.13);
-        "Terra" -> (Massa * 9.819649737724951);
-        "Lua"   -> (Massa * 1.625);
-        "Marte" -> (Massa * 3.72076);
-         _      ->  1
+    {Aceleracao,Corpoceleste,Newton} = case Espace of
+        "Sol"   -> {274.13              , "Sol"     ,(Massa * 274.13)               };
+        "Terra" -> {9.819649737724951   , "Terra"   ,(Massa * 9.819649737724951)    };
+        "Lua"   -> {1.625               , "Lua"     ,(Massa * 1.625)                };
+        "Marte" -> {3.72076             , "Marte"   ,(Massa * 3.72076)              };
+         _      -> {0                   , "..."     , Massa                         }
     end,
     Lugar = case Espace of
         "Sol"   -> "no Sol";
@@ -43,8 +41,11 @@ pesoN(Massa, Espace  ) ->
         "Marte" -> "em Marte";
          _      ->  "..."
     end,
-    {Newton, Massa, Lugar}
+    {{Aceleracao,Corpoceleste,Newton}, Massa, Lugar}
 .
-
+energiaCinetica(MasssaInerte,Velocidade)->
+    J=((MasssaInerte*math:pow(Velocidade,2))/2),
+    {J,{MasssaInerte,Velocidade}}
+.
 %% TERRA e lua
 %% escript ini.erl 100.0 9.81 80.0 70.0 2.0
