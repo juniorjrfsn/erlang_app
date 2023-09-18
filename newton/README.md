@@ -4,7 +4,7 @@ Repositório para exemplos de aplicativos escritos em Erlang
 
 ## **Executar uma aplição**
 ```
-    $ cd newton/src/
+    $ cd src/
 
     $ erlc -pa * calc/fisica.erl
     $ erlc  ini.erl calc/fisica.erl -- windows
