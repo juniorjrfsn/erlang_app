@@ -60,4 +60,3 @@ print_cars(Rest).
 
 %% Execucao utilizando a funcao diretamente
 %% erl -noshell -s carros start "World" -s init stop
- 

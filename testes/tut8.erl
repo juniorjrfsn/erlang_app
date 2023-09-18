@@ -12,5 +12,5 @@ reverse([], Reversed_List) ->
 
 
 
-% c(tut8).	
+% c(tut8).
 % tut8:reverse([1,2,3,4,5,6]).

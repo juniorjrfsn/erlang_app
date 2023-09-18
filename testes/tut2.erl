@@ -6,8 +6,8 @@ convert(M, inch) ->
 
 convert(N, centimeter) ->
     N * 2.54.
-	
+
 % > c(tut2).
 % > tut2:convert(3, inch).
- 
+
 % > tut2:convert(7, centimeter).

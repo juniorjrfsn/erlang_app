@@ -3,8 +3,8 @@
 -export([start/0, stop/0, handle_call/3, handle_cast/2, handle_info/2, init/1]).
 
 % Inicia o servidor web
-start() ->    
-    {ok, Listen} = gen_tcp:listen(8082, [binary, {packet, 0}, {reuseaddr, true}]), 
+start() ->
+    {ok, Listen} = gen_tcp:listen(8082, [binary, {packet, 0}, {reuseaddr, true}]),
     Pid = spawn_link(fun() -> wait_for_connection(Listen) end),
     io:format("Serviço iniciado em http://localhost:8082~nPID: ~w~n", [Pid]),
     {ok, Pid}.
@@ -15,8 +15,8 @@ wait_for_connection(Listen) ->
     spawn(fun() -> handle_request(Socket,"") end),
     wait_for_connection(Listen).
 
-% Manipula a requisição HTTP 
-handle_request(Socket, _Data) ->   
+% Manipula a requisição HTTP
+handle_request(Socket, _Data) ->
     Texto = " Olá galera ! ",
     Response = "HTTP/1.1 200 OK\r\nContent-Type: text/html\r\n\r\n<html><body><h1>Bem-vindo ao servidorlang!</h1><p>PID: " ++ erlang:pid_to_list(self()) ++ "<br/>" ++  Texto ++ "</p></body></html>",
     gen_tcp:send(Socket, Response),
@@ -41,8 +41,8 @@ handle_info(_Info, State) -> {noreply, State}.
 
 %% "GIT BASH" =>  rm -r -f  serverdois.beam	 "WINDOWS" del /f /a  serverdois.beam
 %% erlc serverdois.erl
-	
-		
+
+
 %% erl -sname serverdois -detached -run serverdois start     -- serverdois:start().
 %% erl -sname serverdois -detached -run serverdois stop      -- serverdois:stop().
 
