@@ -28,19 +28,19 @@ main([Mas,Ace,Mas1,Mas2,Dist]) ->
 
         % Força gravitaciona entre a terra e a lua
         GravidadeTerraLua = fisica:forcaGdaTerraEdaLua(),
-        io:format("A força gravitacional da terra e da Lua é de: ~p N ~n ", [GravidadeTerraLua]),
+        io:format("\033[1;36mA força gravitacional da terra e da Lua é de:\e[m \e[4;31m~p N \e[m~n ", [GravidadeTerraLua]),
 
         % Peso de um corpo em relação a gravidade de algum corpo celeste
         {Caso, Massa, Lugar} = fisica:pesoN(M,"Lua"),
         {Aceleracao,Corpoceleste,Newton} = Caso,
-        io:format("Corpo : ~p , Gravidade: ~p ~n ", [Corpoceleste,Aceleracao]),
+        io:format("\033[42m\033[1m\033[33mCorpo : ~p , Gravidade: ~p  \033[0;0m~n ", [Corpoceleste,Aceleracao]),
         io:format("O peso é ~.2f N, para a massa de ~.2f kg ~s.~n", [Newton, Massa, Lugar]),
 
         % Energia cinetica
         Velocidade  = 20,
         CorpoInerte = 10,
         {J,{MasssaInerte,Velocidade}} = fisica:energiaCinetica(CorpoInerte,Velocidade),
-        io:format("A energia cinética é de  ~p Joules para uma massa de ~p  e Velocidade de ~pm/s ~n ", [J,MasssaInerte,Velocidade])
+        io:format("A energia cinética é de  \033[1;32m~p Joules\e[m para uma massa de \033[1;32m~pKg\e[m  e Velocidade de \033[1;32m~pm/s\e[m ~n ", [J,MasssaInerte,Velocidade])
     catch _:_ -> usage()
     end;
 main(_) -> usage().
