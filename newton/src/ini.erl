@@ -68,6 +68,8 @@ usage() ->
 % $ erl -noshell -sname ini -run ini main 100.0 9.81 2000000.0 3000000.0 4.0  -s init stop
 % $ erl -noshell -sname ini -run ini main "100.0" "9.81" "2000000.0" "3000000.0" "4.0"  -s init stop
 
+%% erl -compile calc/fisica.erl -s; erl -compile ini.erl -s; erl -noshell -sname ini -run ini main "100.0" "9.81" "2000000.0" "3000000.0" "4.0"  -s init stop
+
 % $ escript ini.erl 100.0 9.81 2000000.0 3000000.0 4.0
 
 % teste git
