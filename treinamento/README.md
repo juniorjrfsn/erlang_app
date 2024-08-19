@@ -30,8 +30,48 @@
 To run tests for specific apps only:
 ```
     $ rebar3 eunit --application=app1,app2
+    $ ../rebar3/rebar3  eunit --application=treinamento
     $ ../rebar3/rebar3  eunit --app=treinamento
 ```
+
+
+### Files
+To run tests for specific files only:
+
+```
+    $ ../rebar3/rebar3 eunit --file="_build/test/lib/treinamento/src/hello.erl,_build/test/lib/treinamento/src/hello_world.erl"
+    $ ../rebar3/rebar3 eunit --file="src/factorial.erl"  
+```
+Console
+The format is a comma separated list of file paths
+
+
+### Directories
+To run tests for specific directories only:
+
+```
+    $ ../rebar3/rebar3 eunit --dir="_build/test/lib/treinamento/ebin/"
+```
+Console
+The format is a comma separated list of directory paths
+
+
+
+
+### Modules
+To run tests for specific modules only:
+```
+    $ ../rebar3/rebar3 eunit --module=hello
+    $ ../rebar3/rebar3 eunit --module=hello,hello_world
+    $ ../rebar3/rebar3 eunit --module=factorial
+```
+Console
+The format is a comma separated list of module names.
+
+Alias: --suite.
+
+ 
+
 
 ### Create release
 ```
