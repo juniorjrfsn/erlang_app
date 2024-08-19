@@ -15,6 +15,7 @@
 
 start_link() ->    
     
+io:format("Olá\n"),
     supervisor:start_link({local, ?SERVER}, ?MODULE, []).
 
 %% sup_flags() = #{strategy => strategy(),         % optional

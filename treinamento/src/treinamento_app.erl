@@ -11,7 +11,7 @@
 
 start(_StartType, _StartArgs) ->
     
-io:format("Olá\n"),
+    io:format("Olá\n"),
     
     treinamento_sup:start_link().
 

@@ -26,8 +26,12 @@
     1> r3:async_do(ct).
     
 ```
-
-
+### Apps
+To run tests for specific apps only:
+```
+    $ rebar3 eunit --application=app1,app2
+    $ ../rebar3/rebar3  eunit --app=treinamento
+```
 
 ### Create release
 ```
