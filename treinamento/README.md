@@ -7,7 +7,7 @@
 ### Build
 
 ```
-    $ ../rebar3/rebar3 ct --suite=test/first_SUITE,test/second_SUITE
+    ## $ ../rebar3/rebar3 ct --suite=test/first_SUITE,test/second_SUITE
     $ ../rebar3/rebar3 ct
 ```
 
@@ -32,6 +32,7 @@
 ### Create release
 ```
     ../rebar3/rebar3 new release treinamento
+ 
 ```
 
 

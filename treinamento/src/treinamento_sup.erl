@@ -13,7 +13,8 @@
 
 -define(SERVER, ?MODULE).
 
-start_link() ->
+start_link() ->    
+    
     supervisor:start_link({local, ?SERVER}, ?MODULE, []).
 
 %% sup_flags() = #{strategy => strategy(),         % optional
@@ -26,6 +27,7 @@ start_link() ->
 %%                  type => worker(),       % optional
 %%                  modules => modules()}   % optional
 init([]) ->
+    io:format("Olá\n"),
     SupFlags = #{
         strategy => one_for_all,
         intensity => 0,

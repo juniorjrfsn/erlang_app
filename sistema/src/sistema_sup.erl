@@ -30,6 +30,8 @@ init([]) ->
                  intensity => 0,
                  period => 1},
     ChildSpecs = [],
+    
+  
     {ok, {SupFlags, ChildSpecs}}.
 
 %% internal functions
