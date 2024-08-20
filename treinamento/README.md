@@ -33,6 +33,7 @@ erl -noshell -pa ./_build/test/lib/treinamento/ebin -s                          
 
 erl -noshell -pa ./_build/test/lib/treinamento/ebin -s                          tut3        convert   "CENTIMETROS TO POLEGADAS" 5 -s init stop
 erl -noshell -pa ./_build/test/lib/treinamento/ebin -s                          conversor   main   "CENTIMETROS TO POLEGADAS" 5 -s init stop
+erl -noshell -pa ./_build/test/lib/treinamento/ebin -s                          converter   main   "centimetros_to_polegadas" 5 -s init stop
  
  
 
