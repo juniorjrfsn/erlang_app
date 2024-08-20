@@ -75,7 +75,7 @@ Alias: --suite.
 
 ### Create release
 ```
-    ../rebar3/rebar3 new release treinamento
+    ../rebar3/rebar3 new release treinamento 
  
 ```
 
