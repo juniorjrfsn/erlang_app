@@ -4,14 +4,15 @@
 
 usage() -> io:format("Usage: Coloque um texto entre aspas \n"), halt(1).
 main([String]) ->
-    try
-        io:format("Hello, ~s!~n", [String]),
-        start()
-    catch
-        _:_ -> usage()
-    end;
-    main(_) -> usage(),
-  Cars = [{"Toyota", "Camry", 2023}, {"Honda", "Civic", 2022}, {"Ford", "Mustang", 2023},{"Toyota","Camry",2023},{"Honda","Civic",2022},{"Ford","Mustang",2023}]
+  try
+    io:format("Hello, ~s!~n", [String]),
+    start()
+  catch
+    _:_ -> usage()
+  end;
+  main(_) -> usage(),
+  Cars = [{"Toyota", "Camry", 2023}, {"Honda", "Civic", 2022}, {"Ford", "Mustang", 2023},{"Toyota","Camry",2023},{"Honda","Civic",2022},{"Ford","Mustang",2023}], 
+  io:format("Carros, ~s!~n", [Cars])
 .
 
 

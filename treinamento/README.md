@@ -3,16 +3,7 @@
 
 ## An OTP application
 
-
-### Build
-
-```
-    ## $ ../rebar3/rebar3 ct --suite=test/first_SUITE,test/second_SUITE
-    $ ../rebar3/rebar3 ct
-```
-
-### Build
-
+### Build 
 ```
     $ ../rebar3/rebar3 compile
     $ ../rebar3/rebar3 shell
@@ -26,6 +17,31 @@
     1> r3:async_do(ct).
     
 ```
+
+### Build
+
+```
+    ## $ ../rebar3/rebar3 ct --suite=test/first_SUITE,test/second_SUITE
+    $ ../rebar3/rebar3 ct
+```
+
+## executar '.BEAM'
+``` 
+erl -noshell -pa ./_build/test/lib/treinamento/ebin -s                  -run    hello       alooo   "World" -s init stop
+erl -noshell -pa ./_build/test/lib/treinamento/ebin -sname  factorial   -run    factorial   main    6       -s init stop
+erl -noshell -pa ./_build/test/lib/treinamento/ebin -s                          carros      start   "World" -s init stop
+
+erl -noshell -pa ./_build/test/lib/treinamento/ebin -s                          tut3        convert   "CENTIMETROS TO POLEGADAS" 5 -s init stop
+erl -noshell -pa ./_build/test/lib/treinamento/ebin -s                          conversor   main   "CENTIMETROS TO POLEGADAS" 5 -s init stop
+ 
+ 
+
+
+```
+
+
+
+
 ### Apps
 To run tests for specific apps only:
 ```
