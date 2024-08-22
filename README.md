@@ -1,6 +1,10 @@
 # erlang_app
 Repositório para exemplos de aplicativos escritos em Erlang
 
+## **Exemplo de aplicação em Erlang**
+```
+https://epsi.bitbucket.io/lambda/2020/11/10/playing-with-records-erlang/
+```
 
 ## **Executar uma aplição**
 ```
